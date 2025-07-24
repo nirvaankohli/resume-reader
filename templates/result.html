@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Text Result</title>
+    <title>Resume Match Results</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
+
         body {
 
             background: #fff;
@@ -19,39 +21,178 @@
             margin: 0;
 
         }
+
         .container {
 
             background: #f9f9f9;
             border-radius: 2rem;
             box-shadow: 0 2px 16px rgba(0,0,0,0.04);
-            padding: 2.5rem 2rem;
-            max-width: 700px;
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 800px;
             width: 100%;
             text-align: center;
-        }
 
+        }
 
         h1 {
 
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             letter-spacing: -1px;
 
         }
 
-        .pdf-text {
+        .grade-section {
+
+            margin: 2rem 0 1.5rem 0;
+
+        }
+
+        .grade-label {
+
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+
+        }
+
+        .grade-meter {
+
+            width: 100%;
+            max-width: 400px;
+            height: 32px;
+            background: #eee;
+            border-radius: 1.5rem;
+            margin: 0 auto 0.7rem auto;
+            overflow: hidden;
+            position: relative;
+
+        }
+
+        .grade-bar {
+
+            height: 100%;
+            width: 78%; 
+            background: linear-gradient(90deg, #4caf50 60%, #fbc02d 100%);
+            border-radius: 1.5rem 0 0 1.5rem;
+            transition: width 0.4s;
+
+        }
+
+        .grade-score {
+
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #4caf50;
+            margin-bottom: 0.2rem;
+
+        }
+
+        .stats-row {
+
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 1.5rem 0 2.2rem 0;
+            flex-wrap: wrap;
+
+        }
+
+        .stat-box {
 
             background: #fff;
-            border-radius: 1.5rem;
-            border: 1.5px solid #eee;
-            padding: 2rem;
-            margin-top: 1.5rem;
-            max-height: 400px;
-            overflow-y: auto;
-            text-align: left;
-            font-size: 1.1rem;
-            line-height: 1.7;
+            border-radius: 1.2rem;
             box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+            padding: 1.1rem 2.2rem;
+            min-width: 140px;
+        
+        }
+
+        .stat-label {
+
+            font-size: 0.98rem;
+            color: #888;
+
+        }
+
+        .stat-value {
+
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 0.2rem;
+
+        }
+
+        .section-title {
+
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 2.2rem 0 0.7rem 0;
+            color: #222;
+            text-align: left;
+
+        }
+
+        .strengths, .improvements {
+
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+            padding: 1.1rem 1.5rem;
+            text-align: left;
+            margin-bottom: 1.2rem;
+
+        }
+
+        .strengths ul, .improvements ul {
+
+            margin: 0.2rem 0 0 1.2rem;
+            padding: 0;
+
+        }
+
+        .keyword-table {
+
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0 2rem 0;
+            background: #fff;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+
+        }
+
+        .keyword-table th, .keyword-table td {
+
+            padding: 0.7rem 1rem;
+            text-align: left;
+
+        }
+
+        .keyword-table th {
+
+            background: #f5f5f5;
+            font-weight: 700;
+            color: #333;
+
+        }
+
+        .keyword-table tr:not(:last-child) td {
+
+            border-bottom: 1px solid #eee;
+
+        }
+
+        .summary {
+
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+            padding: 1.1rem 1.5rem;
+            text-align: left;
+            margin-bottom: 1.2rem;
+            font-size: 1.08rem;
 
         }
 
@@ -77,23 +218,98 @@
             background: #333;
 
         }
-
-    </style>
-
-</head>
-
-<body>
-
-    <div class="container">
-
-        <h1>Extracted PDF Text</h1>
-
-        <div class="pdf-text">{{ text|safe }}</div>
         
-        <a href="/" class="button">Upload Another PDF</a>
-
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Match Results</h1>
+        <div class="grade-section">
+            <div class="grade-label">Overall Match Grade</div>
+            <div class="grade-meter">
+                <div class="grade-bar"></div>
+            </div>
+            <div class="grade-score">78%</div>
+            <div style="color:#888;font-size:0.98rem;">Good match for this job</div>
+        </div>
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-label">Skills Matched</div>
+                <div class="stat-value">12/15</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Missing Skills</div>
+                <div class="stat-value">3</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Relevant Experience</div>
+                <div class="stat-value">4 yrs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Education Match</div>
+                <div class="stat-value">Yes</div>
+            </div>
+        </div>
+        <div class="section-title">Strengths</div>
+        <div class="strengths">
+            <ul>
+                <li>Strong experience in project management</li>
+                <li>Proficient in Python, Excel, and SQL</li>
+                <li>Excellent communication and leadership skills</li>
+                <li>Relevant degree in required field</li>
+            </ul>
+        </div>
+        <div class="section-title">Areas to Improve</div>
+        <div class="improvements">
+            <ul>
+                <li>Missing experience with AWS or cloud platforms</li>
+                <li>Limited exposure to Agile methodologies</li>
+                <li>Consider adding more quantifiable achievements</li>
+            </ul>
+        </div>
+        <div class="section-title">Keyword Match Table</div>
+        <table class="keyword-table">
+            <tr>
+                <th>Keyword</th>
+                <th>Found in Resume</th>
+                <th>Importance</th>
+            </tr>
+            <tr>
+                <td>Python</td>
+                <td>Yes</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Project Management</td>
+                <td>Yes</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>AWS</td>
+                <td>No</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>Agile</td>
+                <td>No</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>SQL</td>
+                <td>Yes</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>Leadership</td>
+                <td>Yes</td>
+                <td>Medium</td>
+            </tr>
+        </table>
+        <div class="section-title">Summary</div>
+        <div class="summary">
+            Your resume is a strong match for this job, especially in technical and leadership areas. To further improve your chances, consider gaining experience with cloud technologies and Agile practices, and highlight more measurable results in your achievements.
+        </div>
+        <a href="/" class="button">Upload Another Resume</a>
     </div>
-
 </body>
-
 </html> 
