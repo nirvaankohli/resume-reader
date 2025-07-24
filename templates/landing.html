@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Reader - Match Your Resume to Any Job</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+
+        body {
+
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: #fafbfc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .main-wrapper {
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4vw;
+            box-sizing: border-box;
+
+        }
+        
+        .left-content {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            min-width: 0;
+        }
+        .app-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #181818;
+            margin: 0 0 16px 0;
+            letter-spacing: -2px;
+            text-align: left;
+            line-height: 1.05;
+        }
+        .business-desc {
+            font-size: 0.95rem;
+            color: #888;
+            margin-bottom: 36px;
+            margin-left: 2px;
+            text-align: left;
+            max-width: 420px;
+        }
+        .try-btn {
+            display: inline-block;
+            background: #111;
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding: 18px 56px;
+            border: none;
+            border-radius: 999px;
+            text-decoration: none;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            transition: background 0.18s, transform 0.13s;
+            cursor: pointer;
+            margin-top: 0;
+        }
+        .try-btn:hover {
+            background: #333;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .right-image {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 0;
+        }
+        .illustration {
+            width: 340px;
+            max-width: 90vw;
+            border-radius: 24px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+            background: #fff;
+        }
+        @media (max-width: 900px) {
+            .main-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding-top: 60px;
+                min-height: unset;
+            }
+            .right-image {
+                margin-top: 40px;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            .illustration {
+                width: 80vw;
+                max-width: 400px;
+            }
+        }
+        @media (max-width: 600px) {
+            .app-title {
+                font-size: 2.2rem;
+            }
+            .main-wrapper {
+                padding: 0 2vw;
+            }
+            .illustration {
+                width: 95vw;
+                max-width: 95vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="left-content">
+            <div class="app-title">Resume Reader</div>
+            <div class="business-desc">AI-powered tool to instantly match your resume to any job description. Get a match grade and actionable insights to improve your applications.</div>
+            <a href="/read" class="try-btn">Try It</a>
+        </div>
+        <div class="right-image">
+            <img class="illustration" src="https://www.shutterstock.com/image-vector/cv-papers-icon-outline-vector-600nw-1452498125.jpg" alt="Resume Illustration">
+        </div>
+    </div>
+</body>
+</html>

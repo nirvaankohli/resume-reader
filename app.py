@@ -26,6 +26,11 @@ def extract_text_from_pdf(pdf_path):
 
 @app.route('/', methods=['GET', 'POST'])
 
+def landing():
+    return render_template('landing.html')
+
+@app.route('/read', methods=['GET', 'POST'])
+
 def index():
 
     if request.method == 'POST':
@@ -51,7 +56,7 @@ def index():
 
             return render_template('result.html', text=text)
 
-    return render_template('index.html')
+    return render_template('upload.html')
 
 if __name__ == "__main__":
 
