@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Text Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+
+            background: #fff;
+            color: #111;
+            font-family: 'Inter', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+
+        }
+        .container {
+
+            background: #f9f9f9;
+            border-radius: 2rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+            padding: 2.5rem 2rem;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+
+
+        h1 {
+
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+
+        }
+
+        .pdf-text {
+
+            background: #fff;
+            border-radius: 1.5rem;
+            border: 1.5px solid #eee;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.03);
+
+        }
+
+        a.button {
+
+            display: inline-block;
+            margin-top: 2rem;
+            background: #111;
+            color: #fff;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-family: inherit;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.2s;
+
+        }
+
+        a.button:hover {
+
+            background: #333;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Extracted PDF Text</h1>
+
+        <div class="pdf-text">{{ text|safe }}</div>
+        
+        <a href="/" class="button">Upload Another PDF</a>
+
+    </div>
+
+</body>
+
+</html> 
