@@ -74,7 +74,7 @@
 
         <h1>Resume Reader</h1>
 
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" id="resumeForm">
 
             <label for="pdf-upload">Upload PDF</label>
             
@@ -89,6 +89,25 @@
         </form>
 
     </div>
+
+    <div id="loadingOverlay" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;">
+        <div style="margin-bottom:1.5rem;">
+            <div style="width:64px;height:64px;border:8px solid #eee;border-top:8px solid #ff8800;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        </div>
+        <div style="font-size:1.2rem;color:#444;margin-bottom:0.5rem;">Analyzing your resume...</div>
+        <div style="font-size:1rem;color:#888;">This may take a few moments.<br>Please do not refresh or close the page.</div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        document.getElementById('resumeForm').addEventListener('submit', function(e) {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        });
+    </script>
 
 </body>
 

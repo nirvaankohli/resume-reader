@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyzing Resume...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+
+            background: #fff;
+            color: #111;
+            font-family: 'Inter', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+
+        }
+
+        .container {
+
+            background: #f9f9f9;
+            border-radius: 2rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+            padding: 2.5rem 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+
+        }
+
+        .spinner {
+
+            margin: 2rem auto 1.5rem auto;
+            width: 64px;
+            height: 64px;
+            border: 8px solid #eee;
+            border-top: 8px solid #ff8800;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+
+        }
+
+        @keyframes spin {
+
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        
+        }
+
+        .loading-text {
+
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 0.5rem;
+
+        }
+
+        .sub-text {
+
+            font-size: 1rem;
+            color: #888;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <div class="loading-text">Analyzing your resume...</div>
+        <div class="sub-text">This may take a few moments.<br>Please do not refresh or close the page.</div>
+    </div>
+</body>
+</html> 

@@ -68,6 +68,8 @@ Job Description:
 {job_desc}
 '''
 
+    print("getting response")
+
     response = openai_client.chat.completions.create(
         model="gpt-4.1-mini",
         messages=[{"role": "user", "content": prompt}],
@@ -112,6 +114,12 @@ def api_analyze():
     result = analyze_resume_with_jobdesc(resume_text, job_desc)
     return jsonify(result)
 
+@app.route('/loading')
+
+def loading():
+
+    return render_template('loading.html')
+
 @app.route('/read', methods=['GET', 'POST'])
 
 def index():
@@ -139,6 +147,7 @@ def index():
 
             resume_text = extract_text_from_pdf(filepath)
 
+            print(resume_text)
 
             result = analyze_resume_with_jobdesc(resume_text, job_desc)
 
