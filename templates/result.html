@@ -227,44 +227,64 @@
         <div class="grade-section">
             <div class="grade-label">Overall Match Grade</div>
             <div class="grade-meter">
-                <div class="grade-bar"></div>
+                <div class="grade-bar grade-bar-dynamic"></div>
             </div>
-            <div class="grade-score">78%</div>
-            <div style="color:#888;font-size:0.98rem;">Good match for this job</div>
+            <div class="grade-score">{{ overall_match_grade|default(78) }}%</div>
+            <div style="color:#888;font-size:0.98rem;">{% if overall_match_grade|default(78) >= 75 %}Good match for this job{% else %}Needs improvement{% endif %}</div>
         </div>
         <div class="stats-row">
             <div class="stat-box">
+                
                 <div class="stat-label">Skills Matched</div>
-                <div class="stat-value">12/15</div>
+                <div class="stat-value">{{ skills_matched|default(12) }}/{{ total_skills|default(15) }}</div>
+            
             </div>
+            
             <div class="stat-box">
+            
                 <div class="stat-label">Missing Skills</div>
-                <div class="stat-value">3</div>
+                <div class="stat-value">{{ missing_skills|length if missing_skills is defined else 3 }}</div>
+            
             </div>
+            
             <div class="stat-box">
+            
                 <div class="stat-label">Relevant Experience</div>
-                <div class="stat-value">4 yrs</div>
+                <div class="stat-value">{{ relevant_experience|default('4 yrs') }}</div>
+            
             </div>
+            
             <div class="stat-box">
+            
                 <div class="stat-label">Education Match</div>
-                <div class="stat-value">Yes</div>
+                <div class="stat-value">{{ education_match|default('Yes') }}</div>
+            
             </div>
+        
         </div>
+        
         <div class="section-title">Strengths</div>
         <div class="strengths">
             <ul>
-                <li>Strong experience in project management</li>
-                <li>Proficient in Python, Excel, and SQL</li>
-                <li>Excellent communication and leadership skills</li>
-                <li>Relevant degree in required field</li>
+
+                {% for s in strengths|default(['Strong experience in project management','Proficient in Python, Excel, and SQL','Excellent communication and leadership skills','Relevant degree in required field']) %}
+                
+                <li>{{ s }}</li>
+                
+                {% endfor %}
+
             </ul>
         </div>
         <div class="section-title">Areas to Improve</div>
         <div class="improvements">
             <ul>
-                <li>Missing experience with AWS or cloud platforms</li>
-                <li>Limited exposure to Agile methodologies</li>
-                <li>Consider adding more quantifiable achievements</li>
+
+                {% for i in improvements|default(['Missing experience with AWS or cloud platforms','Limited exposure to Agile methodologies','Consider adding more quantifiable achievements']) %}
+                
+                <li>{{ i }}</li>
+
+                {% endfor %}
+
             </ul>
         </div>
         <div class="section-title">Keyword Match Table</div>
@@ -274,42 +294,54 @@
                 <th>Found in Resume</th>
                 <th>Importance</th>
             </tr>
+
+            {% for kw in keyword_table|default([
+
+                {"keyword": "Python", "found": "Yes", "importance": "High"},
+
+                {"keyword": "Project Management", "found": "Yes", "importance": "High"},
+                
+                {"keyword": "AWS", "found": "No", "importance": "Medium"},
+                
+                {"keyword": "Agile", "found": "No", "importance": "Medium"},
+                
+                {"keyword": "SQL", "found": "Yes", "importance": "High"},
+                
+                {"keyword": "Leadership", "found": "Yes", "importance": "Medium"}
+            
+                ]) %}
+
             <tr>
-                <td>Python</td>
-                <td>Yes</td>
-                <td>High</td>
+
+                <td>{{ kw.keyword }}</td>
+
+                <td>{{ kw.found }}</td>
+
+                <td>{{ kw.importance }}</td>
+
             </tr>
-            <tr>
-                <td>Project Management</td>
-                <td>Yes</td>
-                <td>High</td>
-            </tr>
-            <tr>
-                <td>AWS</td>
-                <td>No</td>
-                <td>Medium</td>
-            </tr>
-            <tr>
-                <td>Agile</td>
-                <td>No</td>
-                <td>Medium</td>
-            </tr>
-            <tr>
-                <td>SQL</td>
-                <td>Yes</td>
-                <td>High</td>
-            </tr>
-            <tr>
-                <td>Leadership</td>
-                <td>Yes</td>
-                <td>Medium</td>
-            </tr>
+
+            {% endfor %}
         </table>
         <div class="section-title">Summary</div>
         <div class="summary">
-            Your resume is a strong match for this job, especially in technical and leadership areas. To further improve your chances, consider gaining experience with cloud technologies and Agile practices, and highlight more measurable results in your achievements.
+            {{ summary|default('Your resume is a strong match for this job, especially in technical and leadership areas. To further improve your chances, consider gaining experience with cloud technologies and Agile practices, and highlight more measurable results in your achievements.') }}
         </div>
         <a href="/" class="button">Upload Another Resume</a>
     </div>
+    <script>
+
+    <!--
+      document.addEventListener('DOMContentLoaded', function() {
+
+        var grade = {{ overall_match_grade|default(78)|int }};
+        var bar = document.querySelector('.grade-bar-dynamic');
+
+        if (bar) bar.style.width = grade + '%';
+
+      });
+
+    //-->
+    </script>
 </body>
 </html> 

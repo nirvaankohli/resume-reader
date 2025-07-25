@@ -76,14 +76,16 @@
 
         <form method="post" enctype="multipart/form-data">
 
-            </label for="pdf-upload" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">Upload PDF</label>
+            <label for="pdf-upload">Upload PDF</label>
             
-        </input id="pdf-upload" type="file" name="pdf" accept="application/pdf" required />
+            <input id="pdf-upload" type="file" name="pdf" accept="application/pdf" required />
             
-            </textarea id="job-desc" name="job_desc" placeholder="Paste job description here..." rows="5" style="border: 2px dashed #bbb; border-radius: 1rem; padding: 1.2rem; background: #fff; font-size: 1rem; resize: vertical; font-family: inherit; transition: border 0.2s;"></textarea>
+            <label for="job-desc">Job Description</label>
+            
+            <textarea id="job-desc" name="job_desc" placeholder="Paste job description here..." rows="5" style="border: 2px dashed #bbb; border-radius: 1rem; padding: 1.2rem; background: #fff; font-size: 1rem; resize: vertical; font-family: inherit; transition: border 0.2s;" required></textarea>
             
             <button type="submit">Grade Match</button>
-
+        
         </form>
 
     </div>
