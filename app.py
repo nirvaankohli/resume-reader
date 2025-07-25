@@ -213,6 +213,11 @@ def index():
 
     return render_template('upload.html')
 
+
+def main():
+
+    app.run(debug=False, use_reloader=False)
+
 if __name__ == "__main__":
 
     app.run(debug=False, use_reloader=False)
