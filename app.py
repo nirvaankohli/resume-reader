@@ -31,60 +31,60 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 def analyze_resume_with_jobdesc(resume_text, job_desc):
+    # New, robust prompt for detailed JSON evaluation
+    prompt = f'''
 
-    prompt = f"""
+You are a resume evaluation assistant. Evaluate the candidate's resume against the provided job description and output a single JSON object with the following structure:
 
-        You are a resume analysis assistant. Given the following resume and job description, analyze the resume for the job, and return a JSON object with:
-        
-        - overall_match_grade (percentage)
+- overall_match_grade: (integer, 0-100)
+- skills_matched: (integer)
+- total_skills: (integer)
+- missing_skills: (list of strings)
+- relevant_experience: (string, e.g. '4 yrs', or 'None')
+- education_match: ('Yes' or 'No')
+- strengths: (list of strings)
+- improvements: (list of strings, each a clear area for candidate growth)
+- keyword_table: (list of dicts: {{'keyword': [str], 'found': ['Yes'|'No'], 'importance': ['High'|'Medium'|'Low']}})
+- summary: (string, 1-3 sentences, qualitative)
 
-        - skills_matched (int)
+For each section, reason step by step:
 
-        - total_skills (int)
+1. Skill matching: List all required skills, compare with resume, count matches, and list missing skills.
+2. Experience: Assess type and duration of relevant experience.
+3. Education: Check if education matches requirements.
+4. Strengths: List specific areas where the candidate excels.
+5. Improvements: List actionable, concrete suggestions for growth.
+6. Keyword mapping: For each important keyword from the job description, indicate if found in resume and its importance.
+7. Compose a concise summary (1-3 sentences) synthesizing fit, strengths, and improvement points.
 
-        - missing_skills (list)
+Output ONLY the final JSON object, no explanations, no markdown, no extra text. Ensure the JSON is valid and matches the structure exactly. If any field is missing, fill with a reasonable default.
 
-        - relevant_experience (years or string)
+Resume:
 
-        - education_match (yes/no)
+{resume_text}
 
-        - strengths (list)
+Job Description:
 
-        - improvements (list)
-
-        - keyword_table (list of dicts: keyword, found, importance)
-
-        - summary (string)
-
-        Resume:
-
-        {resume_text}
-
-        Job Description:
-
-        {job_desc}
-
-        """
+{job_desc}
+'''
 
     response = openai_client.chat.completions.create(
-
         model="gpt-4.1-mini",
-
         messages=[{"role": "user", "content": prompt}],
-
-        max_tokens=800,
-
+        max_tokens=900,
         temperature=0.3
-
     )
 
     import json
-
     try:
-
         content = response.choices[0].message.content
-
-        data = json.loads(content)
+        # Try to extract JSON object from the response robustly
+        import re
+        match = re.search(r'\{[\s\S]*\}', content)
+        if match:
+            data = json.loads(match.group(0))
+        else:
+            data = json.loads(content)
 
     except Exception:
 
