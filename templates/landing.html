@@ -4,136 +4,167 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume Reader - Match Your Resume to Any Job</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Anton for carousel, Space Grotesk for slogan/text -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <style>
-
         body {
-
             min-height: 100vh;
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', Arial, sans-serif;
+            font-family: 'Space Grotesk', Arial, sans-serif;
             background: #fafbfc;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-
         }
-
-        .main-wrapper {
-
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
+        .carousel {
             width: 100vw;
-            min-height: 100vh;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 4vw;
-            box-sizing: border-box;
+            overflow: hidden;
+            background: #fff;
+            border-top: 2px solid #f5f5f5;
+            border-bottom: 2px solid #f5f5f5;
+            height: calc(60px + 5vh);
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .carousel-inner {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll 37.5s linear infinite;
+        }
+        .carousel-text {
+
+            font-family: 'Anton', Arial, sans-serif;
+            font-size: calc(30px + 2vh);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: #e6e6e6;
+            text-transform: uppercase;
+            margin: 0 2.5vw;
+            user-select: none;
+            -webkit-user-select: none;
 
         }
-        
-        .left-content {
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .center-content {
             flex: 1 1 0;
             display: flex;
             flex-direction: column;
+            align-items: center;
             justify-content: center;
-            align-items: flex-start;
-            min-width: 0;
+            min-height: 60vh;
+            width: 100vw;
+            text-align: center;
         }
-        .app-title {
-            font-size: 4rem;
-            font-weight: 800;
+        .main-title {
+            font-family: 'Space Grotesk', Arial, sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
             color: #181818;
-            margin: 0 0 16px 0;
-            letter-spacing: -2px;
-            text-align: left;
-            line-height: 1.05;
+            margin: 0 0 18px 0;
+            letter-spacing: -1px;
         }
-        .business-desc {
-            font-size: 0.95rem;
-            color: #888;
-            margin-bottom: 36px;
-            margin-left: 2px;
-            text-align: left;
-            max-width: 420px;
+        .slogan {
+            font-family: 'Space Grotesk', Arial, sans-serif;
+            font-size: 1.35rem;
+            color: #555;
+            margin-bottom: 38px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .try-btn {
+
             display: inline-block;
-            background: #111;
+            background: linear-gradient(90deg, #ff8800 0%, #ff6600 100%);
             color: #fff;
+            font-family: 'Space Grotesk', Arial, sans-serif;
             font-size: 1.25rem;
             font-weight: 700;
             padding: 18px 56px;
             border: none;
             border-radius: 999px;
             text-decoration: none;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            transition: background 0.18s, transform 0.13s;
+            box-shadow: 0 2px 16px rgba(255,102,0,0.10);
+            transition: background-color 1s, transform .5s;
             cursor: pointer;
             margin-top: 0;
+
         }
+
         .try-btn:hover {
-            background: #333;
-            transform: translateY(-2px) scale(1.03);
+            background: linear-gradient(90deg, #ff6600 0%, #ff8800 100%);
+            transform: translateY(-2px) scale(1.04);
         }
-        .right-image {
-            flex: 1 1 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 0;
-        }
-        .illustration {
-            width: 340px;
-            max-width: 90vw;
-            border-radius: 24px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.08);
-            background: #fff;
-        }
-        @media (max-width: 900px) {
-            .main-wrapper {
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: flex-start;
-                padding-top: 60px;
-                min-height: unset;
+        @media (max-width: 700px) {
+            .main-title {
+                font-size: 2.1rem;
             }
-            .right-image {
-                margin-top: 40px;
-                width: 100%;
-                justify-content: flex-start;
+            .carousel-text {
+                font-size: 1.3rem;
             }
-            .illustration {
-                width: 80vw;
-                max-width: 400px;
+            .slogan {
+                font-size: 1.05rem;
+            }
+            .center-content {
+                min-height: 50vh;
             }
         }
-        @media (max-width: 600px) {
-            .app-title {
-                font-size: 2.2rem;
+        @media (max-width: 400px) {
+            .main-title {
+                font-size: 1.2rem;
             }
-            .main-wrapper {
-                padding: 0 2vw;
-            }
-            .illustration {
-                width: 95vw;
-                max-width: 95vw;
+            .carousel-text {
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-wrapper">
-        <div class="left-content">
-            <div class="app-title">Resume Reader</div>
-            <div class="business-desc">AI-powered tool to instantly match your resume to any job description. Get a match grade and actionable insights to improve your applications.</div>
-            <a href="/read" class="try-btn">Try It</a>
+
+    <div class="carousel">
+        <div class="carousel-inner">
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
         </div>
-        <div class="right-image">
-            <img class="illustration" src="https://www.shutterstock.com/image-vector/cv-papers-icon-outline-vector-600nw-1452498125.jpg" alt="Resume Illustration">
+    </div>
+    <div class="center-content">
+        <div class="main-title">Resume Reader</div>
+        <div class="slogan">AI-powered tool to instantly match your resume to any job description.<br>Get a match grade and actionable insights to improve your applications.</div>
+        <a href="/read" class="try-btn">Try It</a>
+    </div>
+    <div class="carousel" style="border-top: 2px solid #f5f5f5; border-bottom: none;">
+        <div class="carousel-inner">
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
+            <span class="carousel-text">RESUME READER</span>
         </div>
     </div>
 </body>
